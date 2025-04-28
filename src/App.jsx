@@ -1,61 +1,43 @@
-"use client"
-
-import { useState } from "react"
-import Sidebar from "./components/Sidebar"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Navbar from "./components/Navbar"
-import FinanceOpportunities from "./components/FinanceOpportunities"
-import FinancingOffers from "./components/FinancingOffers"
+import Sidebar from "./components/Sidebar"
+import Dashboard from "./pages/Dashboard"
+import Profile from "./pages/Profile"
+import Settings from "./pages/Settings"
+import Messages from "./pages/Messages"
+import Subscription from "./pages/Subscription"
+import WhoWeAre from "./pages/WhoWeAre"
+import WhoWeServe from "./pages/WhoWeServe"
+import Discover from "./pages/Discover"
+import Knowledge from "./pages/Knowledge"
+import Home from "./pages/Home"
+import Logout from "./pages/Logout"
 
 function App() {
-  const [activeTab, setActiveTab] = useState("financing")
-
   return (
-    <div className="flex bg-gray-50">
-      {/* Sidebar */}
-      <Sidebar />
-
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+    <Router>
+      <div className="min-h-screen bg-gray-50">
         <Navbar />
-
-        <main className="flex-1 overflow-y-auto p-6">
-          <div className="max-w-7xl mx-auto">
-            {/* Breadcrumb */}
-            <div className="flex items-center text-sm mb-6">
-              <span className="text-gray-500">My ATG /</span>
-              <span className="ml-1 font-medium">Finance And Investment Opportunities</span>
-            </div>
-
-            {/* Tabs */}
-            <div className="flex justify-between items-center mb-6">
-              <h1 className="text-2xl font-bold">Finance Opportunities</h1>
-              <div className="flex space-x-2">
-                <button
-                  className={`px-6 py-2 rounded-full ${activeTab === "financing" ? "bg-black text-white" : "bg-white text-black border"}`}
-                  onClick={() => setActiveTab("financing")}
-                >
-                  Financing
-                </button>
-                <button
-                  className={`px-6 py-2 rounded-full ${activeTab === "investment" ? "bg-black text-white" : "bg-white text-black border"}`}
-                  onClick={() => setActiveTab("investment")}
-                >
-                  Investment
-                </button>
-              </div>
-            </div>
-
-            <h2 className="text-gray-600 mb-8">Unlock Growth Across Africa</h2>
-
-            {/* Finance Opportunities Section */}
-            <FinanceOpportunities />
-
-            {/* Financing Offers Section */}
-            <FinancingOffers />
-          </div>
-        </main>
+        <div className="flex">
+          <Sidebar />
+          <main className="flex-1 p-6 ml-64 mt-16">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/messages" element={<Messages />} />
+              <Route path="/subscription" element={<Subscription />} />
+              <Route path="/who-we-are" element={<WhoWeAre />} />
+              <Route path="/who-we-serve" element={<WhoWeServe />} />
+              <Route path="/discover" element={<Discover />} />
+              <Route path="/knowledge" element={<Knowledge />} />
+              <Route path="/logout" element={<Logout />} />
+            </Routes>
+          </main>
+        </div>
       </div>
-    </div>
+    </Router>
   )
 }
 
